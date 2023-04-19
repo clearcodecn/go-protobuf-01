@@ -1,0 +1,11 @@
+syntax = "proto3";
+package proto;
+
+import "user.proto";
+
+option go_package = "grpc-starter/proto";
+
+message UserDetail {
+    User user = 1;
+}
+

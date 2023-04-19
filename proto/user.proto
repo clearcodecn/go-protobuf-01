@@ -1,0 +1,25 @@
+syntax = "proto3";
+package proto;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "grpc-starter/proto";
+
+message User {
+    enum UserStatus {
+        UnKnown = 0;
+        Active = 1;
+        InActive = 2;
+    }
+    int64 id = 1;
+    string name = 2;
+    string email = 3;
+    string password = 4;
+    string avatar = 5;
+    google.protobuf.Timestamp create_at = 6;
+    google.protobuf.Timestamp update_at = 7;
+    UserStatus status = 8;
+    repeated string mobiles = 9; // repeated field
+    map<string,string> mapFields = 10;
+    google.protobuf.Timestamp birthday = 11;
+}
