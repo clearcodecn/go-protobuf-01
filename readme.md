@@ -2,6 +2,9 @@
 
 This is a simple starter for grpc with golang and protobuf.
 
+欢迎加入学习群
+![https://github.com/clearcodecn/leveldb-demo/raw/master/images/qr.png](https://github.com/clearcodecn/leveldb-demo/raw/master/images/qr.png)
+
 #### Resources 
 
 * [golang 语言](https://golang.org/)
@@ -70,7 +73,8 @@ $ protoc --version
 $ go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
 ```
 
-* 安装grpc依赖到项目
+##### 编译protobuf:
+
 ```javascript
-$ go get -u google.golang.org/grpc
+make build-proto
 ```
