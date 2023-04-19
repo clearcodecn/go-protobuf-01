@@ -78,3 +78,12 @@ $ go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
 ```javascript
 make build-proto
 ```
+
+
+#### 使用 GRPC 
+
+1. 安装 [文档](https://grpc.io/docs/languages/go/quickstart/#regenerate-grpc-code)
+```shell
+$ go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.28
+$ go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.2
+```
