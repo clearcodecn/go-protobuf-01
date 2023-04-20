@@ -2,6 +2,7 @@ package ctrl
 
 import (
 	"context"
+	"fmt"
 	"grpc-starter/internal/service"
 	userProto "grpc-starter/proto"
 	"log"
@@ -21,11 +22,6 @@ func validateLoginRequest(request *userProto.LoginRequest) error {
 
 func (a *AuthController) Login(ctx context.Context, request *userProto.LoginRequest) (*userProto.LoginResponse, error) {
 	log.Println("user login -> ", request.Username, request.Password)
-
-	if err := validateLoginRequest(request); err != nil {
-		return nil, err
-	}
-
 	// biz .
 	user, err := service.NewAuthService().Login(ctx, request.Username, request.Password)
 	if err != nil {
@@ -42,4 +38,13 @@ func (a *AuthController) Login(ctx context.Context, request *userProto.LoginRequ
 	}
 	// 最终再返回你的参数.
 	return resp, nil
+}
+
+func (a *AuthController) Register(ctx context.Context, req *userProto.RegisterRequest) (*userProto.RegisterResponse, error) {
+	userinfo, err := userFromContext(ctx)
+	if err != nil {
+		return nil, err
+	}
+	fmt.Println(userinfo)
+	return &userProto.RegisterResponse{}, nil
 }

@@ -4,21 +4,40 @@ import (
 	"context"
 	"fmt"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/metadata"
 	userProto "grpc-starter/proto"
 	"log"
 	"sync/atomic"
 )
 
 func main() {
+
+	// service a ctx
 	cc := NewUserClientPool("localhost:8000", 10)
-	resp, err := cc.Get().Login(context.Background(), &userProto.LoginRequest{
-		Username: "admin",
-		Password: "admin",
-	})
-	if err != nil {
-		log.Fatal(err)
+	//md := metadata.Pairs("key", "value", "token", "123")
+	ctx := metadata.AppendToOutgoingContext(context.Background(), "token", "123")
+
+	{
+		resp, err := cc.Get().Login(ctx, &userProto.LoginRequest{
+			Username: "",
+			Password: "admin",
+		})
+		if err != nil {
+			log.Fatal(err)
+		}
+		fmt.Println(resp.Token, resp.User.Id)
 	}
-	fmt.Println(resp.Token, resp.User.Id)
+
+	{
+		_, err := cc.Get().Register(ctx, &userProto.RegisterRequest{
+			Username: "",
+			Password: "",
+		})
+		if err != nil {
+			log.Fatal(err)
+		}
+	}
+
 }
 
 type userClientPool struct {
